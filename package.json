@@ -2,18 +2,21 @@
   "name": "bucephalus",
   "version": "1.0.0",
   "description": "Unbeaten bucephalus",
-  "main": "index.js",
   "scripts": {
+    "dev": "NODE_ENV=development nodemon src/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Shaffiullah.G",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
     "express": "^4.16.2"
   },
   "devDependencies": {
     "eslint": "^4.13.1",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0"
+    "eslint-plugin-import": "^2.8.0",
+    "nodemon": "^1.13.3"
   }
 }
