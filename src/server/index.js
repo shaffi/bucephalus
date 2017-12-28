@@ -2,12 +2,23 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const compression = require('compression');
+const cors = require('cors');
+const helmet = require('helmet');
 
 const app = express();
 
 // Set PORT and HOST for the Web server
 const APP_PORT = (process.env.NODE_ENV === 'test' ? process.env.TEST_APP_PORT : process.env.APP_PORT) || '3000';
 const APP_HOST = process.env.APP_HOST || '0.0.0.0';
+
+app.set('port', APP_PORT);
+app.set('host', APP_HOST);
+
+/* 
+  Helmet helps you secure the apps by setting various HTTP headers.
+  It's best to use Helmet early in the middleware stack so that its headers are sure to be set.
+*/
+app.use(helmet());
 
 /*
   req.body Contains key-value pairs of data submitted in the request body.
@@ -22,8 +33,9 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
  */
 app.use(compression());
 
-app.set('port', APP_PORT);
-app.set('host', APP_HOST);
+/* Enable CORS */
+app.use(cors());
+
 
 /*
   The app.locals object has properties that are local variables within the application.
