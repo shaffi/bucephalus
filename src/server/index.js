@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
-
+const logger = require('./utils/logger');
 const app = express();
 
 // Set PORT and HOST for the Web server
@@ -36,7 +36,6 @@ app.use(compression());
 /* Enable CORS */
 app.use(cors());
 
-
 /*
   The app.locals object has properties that are local variables within the application.
   Once set, the value of app.locals properties persist throughout the life of the application,
@@ -55,6 +54,6 @@ app.use(express.static(path.join(__dirname, '/../public')));
   This method is identical to Node’s http.Server.listen().
  */
 app.listen(app.get('port'), app.get('host'), () => {
-  console.log('info', `Server started at http://${app.get('host')}:${app.get('port')}`);
+  logger.log('info', `Server started at http://${app.get('host')}:${app.get('port')}`);
 });
 
